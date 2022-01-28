@@ -1,3 +1,6 @@
+Code for Free Ice Cream robots.  UNless otherwise noted in source files,
+this is copyright H0TClub, with BSD license.
+
 This project uses the Espressif "IDF" (something-development-something) which
 includes freeRTOS.  Clone me and then edit .git/info/exclude to add:
 
