@@ -19,7 +19,7 @@ menu "Free Ice Cream"
             IP address of host computer
 
     config ESP_WIFI_SENDPORT
-        string "destination port"
+        int "destination port"
         default 4498
         help
             host computer's port for UDP packets
