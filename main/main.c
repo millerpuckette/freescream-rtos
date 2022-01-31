@@ -12,8 +12,11 @@
 #include "freertos/task.h"
 #include "driver/gpio.h"
 #include "esp_log.h"
+#include "esp_timer.h"
 #include "sdkconfig.h"
+#include "main.h"
 #include "gyro.h"
+#include "pins.h"
 
 /* for wifi: */
 #include "lwip/err.h"
@@ -24,20 +27,15 @@ void wifi_init(void);
 
 static const char *TAG = "example";
 
-#define BLINK_GPIO 12
-#define USER_LED1 12
-#define USER_LED2 13
-
 static uint8_t s_led_state = 0;
-
 
 static void configure_led(void)
 {
-    gpio_reset_pin(USER_LED1);
-    gpio_reset_pin(USER_LED2);
+    gpio_reset_pin(PIN_LED1);
+    gpio_reset_pin(PIN_LED2);
     /* Set the GPIO as a push/pull output */
-    gpio_set_direction(USER_LED1, GPIO_MODE_OUTPUT);
-    gpio_set_direction(USER_LED2, GPIO_MODE_OUTPUT);
+    gpio_set_direction(PIN_LED1, GPIO_MODE_OUTPUT);
+    gpio_set_direction(PIN_LED2, GPIO_MODE_OUTPUT);
 }
 
 static int xyz_sock;
@@ -61,7 +59,7 @@ static void udp_send(void *msg, int len)
     }
 }
 
-
+void audiotask(void *x);
 
 void app_main(void)
 {
@@ -70,6 +68,7 @@ void app_main(void)
     configure_led();
     wifi_init();
     udp_open();
+    xTaskCreate(audiotask, "audiotask", 4*1024, NULL, 2, NULL);
     if (!gyro_init())
         ESP_LOGI(TAG, "init failed");
 
@@ -81,12 +80,13 @@ void app_main(void)
         if (++count >= 40)
         {
             char buf[80];
-            sprintf(buf, "z %f %f %f;\n", x, y, z);
+            int msec = esp_timer_get_time()/1000;
+            sprintf(buf, "z %d %f %f %f;\n", msec, x, y, z);
             udp_send(buf, strlen(buf));
             ESP_LOGI(TAG, "x=%f, y=%f, z=%f",
                 (180/3.14159)*x, (180/3.14159)*y, (180/3.14159)*z);
-            gpio_set_level(USER_LED1, s_led_state);
-            gpio_set_level(USER_LED2, !s_led_state);
+            gpio_set_level(PIN_LED1, s_led_state);
+            gpio_set_level(PIN_LED2, !s_led_state);
             s_led_state = !s_led_state;
             count = 0;
         }
