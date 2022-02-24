@@ -5,6 +5,7 @@ Sensorboard */
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "gyro.h"
+#include "pins.h"
 
 /* IMU device */
 BNO080 myIMU;
@@ -14,15 +15,15 @@ SPIClass spiPort;
 uint32_t spiPortSpeed = 100*1000;
 
 /* IMU pins */
-byte imuCSPin = 17;
-byte imuWAKPin = 16;
-byte imuINTPin = 35;
-byte imuRSTPin = 5;
+byte imuCSPin = PIN_IMUCSP;
+byte imuWAKPin = PIN_IMUWAK;
+byte imuINTPin = PIN_IMUINT;
+byte imuRSTPin = PIN_IMURST;
 
 /* SPI pins */
-byte spiCLK = 18;
-byte spiMISO = 19;
-byte spiMOSI = 23;
+byte spiCLK = PIN_SPICLK;
+byte spiMISO = PIN_SPIMISO;
+byte spiMOSI = PIN_SPIMOSI;
 
 char TAG[] = "gyro";
 

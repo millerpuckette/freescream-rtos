@@ -1,5 +1,6 @@
 set(COMPONENT_SRCS "main.c \
     wifi.c \
+    net.c \
     audio.c \
     gyro.cpp \
     ../arduino/SparkFun_BNO080_Arduino_Library.cpp \

@@ -18,6 +18,7 @@
 
 #include "lwip/err.h"
 #include "lwip/sys.h"
+#include "main.h"
 
 #define EXAMPLE_ESP_MAXIMUM_RETRY  5
 

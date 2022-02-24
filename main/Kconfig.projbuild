@@ -1,27 +1,9 @@
 menu "Free Ice Cream"
 
-    config ESP_WIFI_SSID
-        string "WiFi SSID"
-        default "ATT509"
+    config LOCALE_NUMBER
+        int "local include file number"
+        default 0
         help
-            SSID (network name) to connect to.
-
-    config ESP_WIFI_PASSWORD
-        string "WiFi Password"
-        default "4221948249"
-        help
-            WiFi password (WPA or WPA2)
-
-    config ESP_WIFI_SENDADDR
-        string "destination IP"
-        default 192.168.1.65
-        help
-            IP address of host computer
-
-    config ESP_WIFI_SENDPORT
-        int "destination port"
-        default 4498
-        help
-            host computer's port for UDP packets
+            locale number (0 includes "locale0.h")
 
 endmenu
