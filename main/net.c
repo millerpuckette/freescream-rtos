@@ -92,7 +92,7 @@ void net_init( void)
         /* this will get overridden later: */
     xyz_dest_addr.sin_port = htons(CONFIG_ESP_WIFI_SENDPORT);
 
-    xTaskCreate(udpreceivertask, "udprcv", 3000, NULL, 6, NULL);
+    xTaskCreate(udpreceivertask, "udprcv", 3000, NULL, PRIORITY_WIFI, NULL);
 }
 
 void net_sendudp(void *msg, int len, int port)

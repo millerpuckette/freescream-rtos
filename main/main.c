@@ -54,7 +54,7 @@ void app_main(void)
     configure_led();
     wifi_init();
     net_init();
-    xTaskCreate(audiotask, "audiotask", 4*1024, NULL, 5, NULL);
+    xTaskCreate(audiotask, "audiotask", 4*1024, NULL, PRIORITY_AUDIO, NULL);
     if (!gyro_init())
         ESP_LOGI(TAG, "gyro init failed");
 

@@ -1,13 +1,9 @@
-Code for Free Ice Cream robots.  UNless otherwise noted in source files,
+Code for Free Ice Cream robots.  Unless otherwise noted in source files,
 this is copyright H0TClub, with BSD license.
 
-This project uses the Espressif "IDF" (something-development-something) which
-includes freeRTOS.  Clone me and then edit .git/info/exclude to add:
 
-    build
-    sdkconfig.old
-    sdkconfig
-
+This project uses the Espressif "IDF" (something-development-framework) which
+includes freeRTOS.
 
 SETTING UP COMPILE CHAIN IN LINUX:
 follow instructions in 
@@ -34,4 +30,7 @@ sdkconfig.defaults - default configuration for building sdkconfig
 
 
 dolist:
-add wifi.c and send test messages to host port
+time tags for gyro and lidar to align them together (or use gyro latest data
+to rotate lidar data?)
+
+time measurement - measure time differences between incoming pings

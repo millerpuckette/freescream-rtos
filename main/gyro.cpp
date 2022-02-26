@@ -1,11 +1,12 @@
-/* use SparkFun BNO080 library (which uses stuf from Arduino) to get orientation of Complex Arts
-Sensorboard */
+/* use SparkFun BNO080 library (which uses stuff from Arduino) to get
+    orientation of Complex Arts Sensorboard */
 
 #include "../arduino/SparkFun_BNO080_Arduino_Library.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "gyro.h"
 #include "pins.h"
+#include "main.h"
 
 /* IMU device */
 BNO080 myIMU;
@@ -63,7 +64,7 @@ extern "C" int gyro_init(void)
     myIMU.enableRotationVector(50);
     
         /* kick off a polling task */
-    xTaskCreate(gyro_task, "gyro", 2048, NULL, 2, NULL);
+    xTaskCreate(gyro_task, "gyro", 2048, NULL, PRIORITY_GYRO, NULL);
     return (1);
 }
 
